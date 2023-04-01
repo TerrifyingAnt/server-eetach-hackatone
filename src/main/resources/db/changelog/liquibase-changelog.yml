@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/create-database.xml
+  - include:
+      file: db/changelog/02-insert-data-professions.xml
+  - include: 
+      file: db/changelog/03-insert-data-users.xml
+  - include: 
+      file: db/changelog/04-insert-data-theme.xml
+  - include: 
+      file: db/changelog/05-insert-data-questions.xml  
+  - include:
+      file: db/changelog/06-insert-data-answers.xml  
+  - include:
+      file: db/changelog/07-insert-data-task-variants.xml 
+  - include:
+      file: db/changelog/08-insert-data-test.xml 

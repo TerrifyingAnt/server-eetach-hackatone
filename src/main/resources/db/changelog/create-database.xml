@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="01" author="terrifyingAnt">
+        <!--* ####################################### -->
+        <!--* Создание таблички с темами для вопросов -->
+        <!--* ####################################### -->
+        <createTable tableName="profession_table"
+            remarks="Табличка с должностями полльзователей">
+
+            <column name="profession_id" type="int" autoIncrement="true">
+                <constraints  nullable="false" unique="true" primaryKey="true"/>
+            </column>
+
+            <column name="profession_title" type="varchar(250)">
+                <constraints  nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+
+        <!--* ################################## -->
+        <!--* Создание таблички с пользователями -->
+        <!--* ################################## -->
+        <createTable tableName="user_table"
+            remarks="Табличка с пользователями">
+
+            <column name="user_id" type="int" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+
+            <column name="user_full_name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="user_profession_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="user_rating" type="int" defaultValueNumeric="0"/>
+
+            <column name="user_phone_number" type="varchar(11)">
+                <constraints  nullable="false" unique="true"/>
+            </column>
+
+            <column name="user_email" type="varchar(100)">
+                <constraints  nullable="false" unique="true"/>
+            </column>
+
+            <column name="user_vk_link" type="varchar(100)">
+                <constraints  nullable="true"/>
+            </column>
+
+            <column name="user_tg_link" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="user_password" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="user_table" baseColumnNames="user_profession_id"
+            constraintName="user_profession_id_fk"
+            referencedTableName="profession_table" referencedColumnNames="profession_id"/>
+
+
+        <!--* ####################################### -->
+        <!--* Создание таблички с темами для вопросов -->
+        <!--* ####################################### -->
+        <createTable tableName="theme_table"
+            remarks="Табличка с темами для вопросов">
+
+            <column name="theme_id" type="int" autoIncrement="true">
+                <constraints  nullable="false" unique="true" primaryKey="true"/>
+            </column>
+
+            <column name="theme_title" type="varchar(250)">
+                <constraints  nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+
+        <!--* ############################# -->
+        <!--* Создание таблички с вопросами -->
+        <!--* ############################# -->
+        <createTable tableName="question_table"
+            remarks="Табличка с вопросами">
+            
+            <column name="question_id" type="int" autoIncrement="true">
+                <constraints  nullable="false" unique="true" primaryKey="true"/>
+            </column>
+
+            <column name="question_title" type="varchar(250)">
+                <constraints  nullable="false" unique="true"/>
+            </column>
+
+            <column name="question_source_path" type="varchar(250)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="theme_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="question_table" baseColumnNames="theme_id"
+            constraintName="theme_id_fk"
+            referencedTableName="theme_table" referencedColumnNames="theme_id"/>
+
+
+        <!--* ####################################### -->
+        <!--* Создание таблички с ответами на вопросы -->
+        <!--* ####################################### -->
+        <createTable tableName="answer_table"
+            remarks="Табличка с ответами на вопросы">
+
+            <column name="answer_id" type="int" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+
+            <column name="answer_title" type="varchar(250)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+
+        <!--* ###################################### -->
+        <!--* Создание таблички с вариантами задания -->
+        <!--* ###################################### -->
+        <createTable tableName="task_variant_table"
+            remarks="Табличка с вариантами заданий (вопрос-ответ-правильный\неправильный-рейтинг)">
+
+            <column name="task_variant_id" type="int" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+
+            <column name="answer_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="question_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="task_variant_right" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="task_variant_score" type="int" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="task_variant_table" baseColumnNames="answer_id"
+            constraintName="answer_id_fk"
+            referencedTableName="answer_table" referencedColumnNames="answer_id"/>
+
+        <addForeignKeyConstraint baseTableName="task_variant_table" baseColumnNames="question_id"
+            constraintName="question_id_fk"
+            referencedTableName="question_table" referencedColumnNames="question_id"/>
+
+
+        <!--* ########################## -->
+        <!--* Создание таблички с тестом -->
+        <!--* ########################## -->
+        <createTable tableName="test_table"
+            remarks="Табличка с тестом">
+
+            <column name="test_note_id" type="int" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+
+            <column name="task_variant_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="test_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="test_table" baseColumnNames="task_variant_id"
+            constraintName="task_variant_id_fk"
+            referencedTableName="task_variant_table" referencedColumnNames="task_variant_id"/>
+
+        <!--* ################################################## -->
+        <!--* Создание таблички для сохранения результатов теста -->
+        <!--* ################################################## -->
+        <createTable tableName="result_table"
+            remarks="Табличка для сохранения рещультатов тестирования">
+
+            <column name="result_id" type="int" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+
+            <column name="user_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="test_note_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="result_choosen_answer" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="result_table" baseColumnNames="user_id"
+            constraintName="user_id_fk"
+            referencedTableName="user_table" referencedColumnNames="user_id"/>
+
+        <addForeignKeyConstraint baseTableName="result_table" baseColumnNames="test_note_id"
+            constraintName="test_note_id_fk"
+            referencedTableName="test_table" referencedColumnNames="test_note_id"/>
+    
+    </changeSet>
+</databaseChangeLog>

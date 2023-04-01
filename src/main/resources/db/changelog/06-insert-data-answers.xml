@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+  <changeSet id="06" author="terrifyingAnt">
+
+    <insert tableName="answer_table">
+        <column name="answer_title" value="Нельзя"/>
+    </insert>
+
+    <insert tableName="answer_table">
+        <column name="answer_title" value="Можно"/>
+    </insert>
+
+    <insert tableName="answer_table">
+        <column name="answer_title" value="Можно только электронки"/>
+    </insert>
+
+    <insert tableName="answer_table">
+        <column name="answer_title" value="Можно, если никто не видит"/>
+    </insert>
+
+    <insert tableName="answer_table">
+        <column name="answer_title" value="Бежать"/>
+    </insert>
+
+    <insert tableName="answer_table">
+        <column name="answer_title" value="Git commit, git push, leave building"/>
+    </insert>
+
+    <insert tableName="answer_table">
+        <column name="answer_title" value="Не паникуя выйти из здания через аварийные выходы"/>
+    </insert>
+
+    <insert tableName="answer_table">
+        <column name="answer_title" value="Ничего не делать"/>
+    </insert>
+
+    <insert tableName="answer_table">
+        <column name="answer_title" value="Панель управления"/>
+    </insert>
+
+    <insert tableName="answer_table">
+        <column name="answer_title" value="Кнопка показать ближайшие дни рождения"/>
+    </insert>
+
+    <insert tableName="answer_table">
+        <column name="answer_title" value="Инструменты управления"/>
+    </insert>
+
+  </changeSet>
+</databaseChangeLog>

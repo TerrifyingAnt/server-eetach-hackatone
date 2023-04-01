@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+  <changeSet id="03" author="terrifyingAnt">
+
+        <insert tableName="user_table">
+            <column name="user_full_name" value="Иванов Иван Иванович"/>
+            <column name="user_rating" valueNumeric="125"/>
+            <column name="user_phone_number" value="81234567890"/>
+            <column name="user_email" value="example1@qwerty.ru"/>
+            <column name="user_vk_link" value="https://vk.com/terrifyingant"/>
+            <column name="user_password" value="qwertyqwerty"/>
+            <column name="user_profession_id" value="1"/>
+        </insert>
+
+        <insert tableName="user_table">
+            <column name="user_full_name" value="Петров Петр Петрович"/>
+            <column name="user_rating" valueNumeric="73"/>
+            <column name="user_phone_number" value="25551234567"/>
+            <column name="user_email" value="example2@qwerty.ru"/>
+            <column name="user_vk_link" value="https://vk.com/johndoe"/>
+            <column name="user_password" value="p@ssw0rd123"/>
+            <column name="user_profession_id" value="2"/>
+        </insert>
+
+        <insert tableName="user_table">
+            <column name="user_full_name" value="Вячеславов Вячеслав Вячеславович"/>
+            <column name="user_rating" valueNumeric="73"/>
+            <column name="user_phone_number" value="15551234568"/>
+            <column name="user_email" value="example3@wqerty.ru"/>
+            <column name="user_vk_link" value="https://vk.com/johndoe"/>
+            <column name="user_password" value="p@ssw0rd456"/>
+            <column name="user_profession_id" value="3"/>
+        </insert>
+
+
+  </changeSet>
+</databaseChangeLog>
+
+
+  

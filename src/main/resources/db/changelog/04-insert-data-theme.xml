@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+  <changeSet id="04" author="terrifyingAnt">
+
+    <insert tableName="theme_table">
+        <column name="theme_title" value="Обучение технике безопасности"/>
+    </insert>
+
+    <insert tableName="theme_table">
+        <column name="theme_title" value="Ознакомление с инструкциями и регламентами работы в компании"/>
+    </insert>
+
+    <insert tableName="theme_table">
+        <column name="theme_title" value="Обучение по работе с внутренней системой управления проектами"/>
+    </insert>
+
+    <insert tableName="theme_table">
+        <column name="theme_title" value="Обучение корпоративной культуре, пониманию ценностей компании"/>
+    </insert>
+
+    <insert tableName="theme_table">
+        <column name="theme_title" value="Знакомство с компанией, офисом и коллегами"/>
+    </insert>
+
+    <insert tableName="theme_table">
+        <column name="theme_title" value="Участие в нефоральных активностях"/>
+    </insert>
+  </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+  <changeSet id="05" author="terrifyingAnt">
+
+    <insert tableName="question_table">
+        <column name="question_title" value="Можно ли уходить, не выключив за собой компьютер?"/>
+        <column name="theme_id" value="1"/>
+    </insert>
+
+    <insert tableName="question_table">
+        <column name="question_title" value="В случае экстренной ситуации, нужно:"/>
+        <column name="theme_id" value="1"/>
+    </insert>
+
+    <insert tableName="question_table">
+        <column name="question_title" value="Можно ил курить на рабочем месте?"/>
+        <column name="theme_id" value="2"/>
+    </insert>
+
+    <insert tableName="question_table">
+        <column name="question_title" value="Что находится в выделенной зоне?"/>
+        <column name="theme_id" value="3"/>
+        <column name="question_source_path" value="http://localhost:8080/file/unnamed.jpg"/>
+    </insert>
+
+  </changeSet>
+</databaseChangeLog>
