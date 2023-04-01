@@ -5,7 +5,9 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,16 +51,22 @@ public class DataBaseController {
     @Autowired
     ResultRepository resultRepository;
 
-    @GetMapping("/get-professions")
-    public List<Profession> getAllProfessions(){
-        List<Profession> list = (List<Profession>) professionRepository.findAll();
-        return list;
-    }
 
+    // метод для получения пользователей (пароли не передаются)
+    // хз, тут костыль конечно, но с другой стороны у нас mvp...
     @GetMapping("/get-users")
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers(@RequestParam(name = "profession", required = false) String profession) {
         List<User> users = new ArrayList<User>();
+        if(profession != null) {
+            Profession professionId = professionRepository.findByTitle(profession);
+            for (User user : userRepository.findAllByProfession(professionId)) {
+                user.setPassword("");
+                users.add(user);
+            }
+        }
+        else 
         for (User user : userRepository.findAll()) {
+            user.setPassword("");
             users.add(user);
         }
         return users;
@@ -66,33 +74,16 @@ public class DataBaseController {
 
     // метод авторизации пользователя по почте и паролю
     @PostMapping("/auth")
-    public User authUser(@RequestBody User user) {
+    public ResponseEntity<User> authUser(@RequestBody User user) {
         if (userRepository.findByEmail(user.getEmail()).getPassword() == user.getPassword()) {        
-            return userRepository.findByEmail(user.getEmail());
+            return ResponseEntity.ok(userRepository.findByEmail(user.getEmail()));
         }
-        return null;
+        return ResponseEntity.badRequest().build();
     }
 
-    @GetMapping("/get-questions")
-    public List<Question> getAllQuestions() {
-        List<Question> list = (List<Question>) questionRepository.findAll();
-        return list;
-    }
-
-    @GetMapping("/get-task-variants")
-    public List<TaskVariant> getAllTasks() {
-        List<TaskVariant> list = (List<TaskVariant>) taskVariantRepository.findAll();
-        return list;
-    }
-
-    @GetMapping("/get-test")
-    public List<Test> getAllTests() {
-        List<Test> list = (List<Test>) testRepository.findAll();
-        return list;
-    }
-
-    @GetMapping("/get-test-by-id")
-    public List<Test> getTest(@RequestParam int id) {
+    // метод для получения тестового задания
+    @GetMapping("/get-test/{id}")
+    public List<Test> getTest(@PathVariable("id") int id) {
         List<Test> list = (List<Test>) testRepository.findByTestId(id);
         return list;
     }
@@ -101,6 +92,17 @@ public class DataBaseController {
     public List<Result> getResult() {
         List<Result> list = (List<Result>) resultRepository.findAll();
         return list;
-    }     
+    }  
+
+    @PostMapping("/upload-result")
+    public void uploadTestResult(@RequestBody List<Result> resultList) {
+        for(int i = 0; i < resultList.size(); i++)
+            resultRepository.save(resultList.get(i)); 
+    }  
+
+
+
+
+
     
 }
