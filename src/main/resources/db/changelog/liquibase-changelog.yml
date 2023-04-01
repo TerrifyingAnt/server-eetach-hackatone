@@ -15,3 +15,5 @@ databaseChangeLog:
       file: db/changelog/07-insert-data-task-variants.xml 
   - include:
       file: db/changelog/08-insert-data-test.xml 
+  - include:
+      file: db/changelog/09-insert-data-result.xml 

@@ -17,21 +17,17 @@ public class Result {
     private Integer id;
 
     @Column(name = "result_choosen_answer", nullable = false)
-    private Integer chosenAnswer;
-
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "test_id")
-    private Test test;
+    private Boolean chosenAnswer;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Result(Integer id, Integer chosenAnswer, Test test, User user) {
+    public Result() {}
+
+    public Result(Integer id, Boolean chosenAnswer, Test test, User user) {
         this.id = id;
         this.chosenAnswer = chosenAnswer;
-        this.test = test;
         this.user = user;
     }
 
@@ -43,20 +39,12 @@ public class Result {
         this.id = id;
     }
 
-    public Integer getChosenAnswer() {
+    public Boolean getChosenAnswer() {
         return chosenAnswer;
     }
 
-    public void setChosenAnswer(Integer chosenAnswer) {
+    public void setChosenAnswer(Boolean chosenAnswer) {
         this.chosenAnswer = chosenAnswer;
-    }
-
-    public Test getTest() {
-        return test;
-    }
-
-    public void setTest(Test test) {
-        this.test = test;
     }
 
     public User getUser() {

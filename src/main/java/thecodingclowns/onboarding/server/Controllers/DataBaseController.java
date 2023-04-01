@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import thecodingclowns.onboarding.server.API.ProfessionRepository;
 import thecodingclowns.onboarding.server.API.QuestionRepository;
+import thecodingclowns.onboarding.server.API.ResultRepository;
 import thecodingclowns.onboarding.server.API.TaskVariantRepository;
 import thecodingclowns.onboarding.server.API.TestRepository;
 import thecodingclowns.onboarding.server.API.UserRepository;
 import thecodingclowns.onboarding.server.Models.Profession;
 import thecodingclowns.onboarding.server.Models.Question;
+import thecodingclowns.onboarding.server.Models.Result;
 import thecodingclowns.onboarding.server.Models.TaskVariant;
 import thecodingclowns.onboarding.server.Models.Test;
 import thecodingclowns.onboarding.server.Models.User;
@@ -43,6 +45,9 @@ public class DataBaseController {
 
     @Autowired
     TestRepository testRepository;
+
+    @Autowired
+    ResultRepository resultRepository;
 
     @GetMapping("/get-professions")
     public List<Profession> getAllProfessions(){
@@ -91,5 +96,11 @@ public class DataBaseController {
         List<Test> list = (List<Test>) testRepository.findByTestId(id);
         return list;
     }
+
+    @GetMapping("/get-result")
+    public List<Result> getResult() {
+        List<Result> list = (List<Result>) resultRepository.findAll();
+        return list;
+    }     
     
 }
