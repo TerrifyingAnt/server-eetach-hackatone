@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
   <head>
     <title>Quiz Form</title>
     <style>
@@ -47,25 +47,34 @@
   </head>
   <body>
     <div class="form-container">
-      <form>
-        <label for="question">Question:</label>
+      <form method="post" action="/save-question">
+        <label for="question">Вопрос:</label>
         <input type="text" id="question" name="question">
-        
-        <label for="option1">Answer Option 1:</label>
+
+        <label for="option1">Ответ 1:</label>
         <input type="text" id="option1" name="option1">
-        <label class="radio"><input type="radio" name="correct_answer" value="option1">Correct Answer</label>
+        <label class="radio"><input type="radio" name="Правильный ответ" value="option1">Correct Answer</label>
         
-        <label for="option2">Answer Option 2:</label>
+        <label for="option2">Ответ 2:</label>
         <input type="text" id="option2" name="option2">
-        <label class="radio"><input type="radio" name="correct_answer" value="option2">Correct Answer</label>
+        <label class="radio"><input type="radio" name="Правильный ответ" value="option2">Correct Answer</label>
         
-        <label for="option3">Answer Option 3:</label>
+        <label for="option3">Ответ 3:</label>
         <input type="text" id="option3" name="option3">
-        <label class="radio"><input type="radio" name="correct_answer" value="option3">Correct Answer</label>
+        <label class="radio"><input type="radio" name="Правильный ответ" value="option3">Correct Answer</label>
         
-        <label for="option4">Answer Option 4:</label>
+        <label for="option4">Ответ 4:</label>
         <input type="text" id="option4" name="option4">
-        <label class="radio"><input type="radio" name="correct_answer" value="option4">Correct Answer</label>
+        <label class="radio"><input type="radio" name="Правильный ответ" value="option4">Correct Answer</label>
+
+        <label for="theme">Тема вопроса:</label>
+        <select id="theme" name="theme">
+            <option value="">Выбрать тему</option>
+            <option th:each="theme : ${themes}" th:value="${theme}" th:text="${theme}"></option>
+        </select>
+
+        <label for="picture">Изображение:</label>
+        <input type="file" id="picture" name="picture">
         
         <input type="submit" value="Submit">
       </form>
