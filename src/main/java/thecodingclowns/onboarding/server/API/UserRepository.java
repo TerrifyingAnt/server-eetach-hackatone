@@ -11,5 +11,7 @@ import thecodingclowns.onboarding.server.Models.User;
 public interface UserRepository extends CrudRepository<User, Integer>{
     public User findByEmail(String email);
     public List<User> findAllByProfession(Profession profession);
+    public List<User> findByPhoneNumberContaining(String phone);
+    public List<User> findByFullNameContaining(String name);
     
 }

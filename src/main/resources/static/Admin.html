@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Quiz Form</title>
+    <style>
+      /* Style for the form container */
+      .form-container {
+        width: 50%;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      
+      /* Style for the question input field */
+      .form-container label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 10px;
+      }
+      
+      /* Style for the answer option input fields */
+      .form-container input[type="text"] {
+        width: 80%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+      }
+      
+      /* Style for the radio button labels */
+      .form-container label.radio {
+        display: block;
+        margin-bottom: 5px;
+      }
+      
+      /* Style for the submit button */
+      .form-container input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <form>
+        <label for="question">Question:</label>
+        <input type="text" id="question" name="question">
+        
+        <label for="option1">Answer Option 1:</label>
+        <input type="text" id="option1" name="option1">
+        <label class="radio"><input type="radio" name="correct_answer" value="option1">Correct Answer</label>
+        
+        <label for="option2">Answer Option 2:</label>
+        <input type="text" id="option2" name="option2">
+        <label class="radio"><input type="radio" name="correct_answer" value="option2">Correct Answer</label>
+        
+        <label for="option3">Answer Option 3:</label>
+        <input type="text" id="option3" name="option3">
+        <label class="radio"><input type="radio" name="correct_answer" value="option3">Correct Answer</label>
+        
+        <label for="option4">Answer Option 4:</label>
+        <input type="text" id="option4" name="option4">
+        <label class="radio"><input type="radio" name="correct_answer" value="option4">Correct Answer</label>
+        
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+  </body>
+</html>

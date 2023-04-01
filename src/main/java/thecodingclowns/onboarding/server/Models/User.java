@@ -120,6 +120,14 @@ public class User {
         this.password = password;
     }
 
+    public Profession getProfession() {
+        return profession;
+    }
+
+    public void setProfession(Profession profession) {
+        this.profession = profession;
+    }
+
     
     
 }

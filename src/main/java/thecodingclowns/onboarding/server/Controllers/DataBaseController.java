@@ -55,16 +55,39 @@ public class DataBaseController {
     // метод для получения пользователей (пароли не передаются)
     // хз, тут костыль конечно, но с другой стороны у нас mvp...
     @GetMapping("/get-users")
-    public List<User> getAllUsers(@RequestParam(name = "profession", required = false) String profession) {
+    public List<User> getAllUsers(@RequestParam(name = "filter", required = false) String filter, @RequestParam(name = "profession", required = false) String profession) {
         List<User> users = new ArrayList<User>();
-        if(profession != null) {
-            Profession professionId = professionRepository.findByTitle(profession);
-            for (User user : userRepository.findAllByProfession(professionId)) {
+        if(filter != null) {
+            if(filter.indexOf("8", 0) != -1) {
+                for (User user : userRepository.findByPhoneNumberContaining(filter)) {
+                    user.setPassword("");
+                    users.add(user);
+                }
+            }   
+            else
+            for (User user : userRepository.findByFullNameContaining(filter)) {
                 user.setPassword("");
                 users.add(user);
             }
         }
-        else 
+        if(profession != null && users.size() > 0) {
+            List<User> newUsers = new ArrayList<User>();
+            for(User user : users) {
+                if(user.getProfession().getTitle().equals(profession)) {
+                    newUsers.add(user);
+                }
+            }
+            users = new ArrayList<User>(newUsers);
+        }
+        else
+        if(profession != null) {
+            for (User user : userRepository.findAllByProfession(professionRepository.findByTitle(profession))) {
+                user.setPassword("");
+                users.add(user);
+            }
+        }
+        else
+        if(users.size() == 0)
         for (User user : userRepository.findAll()) {
             user.setPassword("");
             users.add(user);
@@ -88,12 +111,15 @@ public class DataBaseController {
         return list;
     }
 
+
+    // метод для получения результатов тестирования пользователя TODO
     @GetMapping("/get-result")
     public List<Result> getResult() {
         List<Result> list = (List<Result>) resultRepository.findAll();
         return list;
     }  
 
+    // метод для загрузки результатов
     @PostMapping("/upload-result")
     public void uploadTestResult(@RequestBody List<Result> resultList) {
         for(int i = 0; i < resultList.size(); i++)
