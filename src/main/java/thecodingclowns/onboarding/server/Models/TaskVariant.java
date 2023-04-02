@@ -7,12 +7,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
+
 
 @Entity
 @Table(name = "task_variant_table")
 public class TaskVariant {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_variant_id", nullable = false, unique = true)
     private Integer id;
 
@@ -20,13 +25,17 @@ public class TaskVariant {
     @JoinColumn(name = "question_id")
     private Question question;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="answer_id")
+    private Answer answer;
+
     @Column(name = "task_variant_right", nullable = false)
     private Boolean isTrue;
 
     @Column(name = "task_variant_score", nullable = false)
     private Integer score;
 
-    public TaskVariant() {}
+    public TaskVariant() { score = 0;}
     
     public TaskVariant(Integer id, Question question, Boolean isTrue, Integer score) {
         this.id = id;
@@ -65,6 +74,14 @@ public class TaskVariant {
 
     public void setScore(Integer score) {
         this.score = score;
+    }
+
+    public Answer getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
     }
 
     

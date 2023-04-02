@@ -6,5 +6,6 @@ import thecodingclowns.onboarding.server.Models.Theme;
 
 
 public interface ThemeRepository extends CrudRepository<Theme, Integer>{
+    public Theme findByTitle(String title);
     
 }

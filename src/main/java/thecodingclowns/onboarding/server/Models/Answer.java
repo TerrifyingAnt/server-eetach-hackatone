@@ -5,11 +5,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
 @Entity
 @Table(name = "answer_table")
 public class Answer {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "answer_id", nullable = false, unique = true)
     private Integer id;
 
@@ -20,6 +24,8 @@ public class Answer {
         this.id = id;
         this.title = title;
     }
+
+    public Answer() {}
 
     public Integer getId() {
         return id;

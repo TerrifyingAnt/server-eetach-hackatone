@@ -34,4 +34,11 @@ public class FileDto implements Serializable {
 
     private String filename;
 
+    public String getTitle() {
+        return this.title;
+    }
+
+
+
+
 }

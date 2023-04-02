@@ -111,6 +111,12 @@ public class DataBaseController {
         return list;
     }
 
+    @GetMapping("/get-test")
+    public List<Test> getAllTests() {
+        List<Test> list = (List<Test>) testRepository.findAll();
+        return list;
+    }
+
 
     // метод для получения результатов тестирования пользователя TODO
     @GetMapping("/get-result")
